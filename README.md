@@ -1,1 +1,1 @@
-# -transfer-wsl-commands
+# transfer-wsl-commands
