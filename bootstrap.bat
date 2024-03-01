@@ -48,20 +48,21 @@ rem get arguments
 	)
 
 :checkopts
-for %%i in (%SRC%) do set DATA=%%~ai
-echo %DATA% %SRC%
 if /i "%DATA%" equ "d" if /i "%SRC%" neq "" (
 	echo "%SRC% is not folder."
 	exit /b
 )
 
 if not exist "%DIST%" (
+	echo "Create distination directory!"
 	mkdir %DIST%
 )
 
+echo "Make transfer batchs!"
 for /f %%F in ('dir "%SRC%\*" /A:-D /B') do (
 	echo !BASE_TEXT:COMMAND=%%F! > %DIST%%%F.bat
 )
+echo "Done!"
 
 goto :eof
 
