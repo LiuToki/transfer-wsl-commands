@@ -19,11 +19,18 @@
 - [License](#license)
 
 # How to use
+- all command
 ```
 $ bootstrap.bat
 ```
 
+- one command
+```
+$ bootstrap.bat -c COMMAND
+```
+
 And then, please add the created bin folder to the environment variables.
+If you need more info, please use -h option.
 
 ## Author
 [LiuToki](https://github.com/LiuToki)

@@ -37,6 +37,13 @@ rem get arguments
 			shift
 		)
 
+		if "%~1"=="-c" set res=1
+		if "%~1"=="--command" set res=1
+		if defined res (
+			set CMD_NAME=%2 & set res=
+			shift
+		)
+
 		if "%~1"=="-h" set res=1
 		if "%~1"=="--help" set res=1
 		if defined res (
@@ -58,6 +65,26 @@ if not exist "%DIST%" (
 	mkdir %DIST%
 )
 
+rem Check simgle command or not.
+if defined CMD_NAME (
+	goto :single
+) else (
+	goto :all
+)
+
+:single
+set "X=!CMD_NAME!"
+    :trimLoop
+    if "!X:~-1!"==" " (
+        set "X=!X:~0,-1!"
+        goto trimLoop
+    )
+    set "CMD_NAME=!X!"
+echo !BASE_TEXT:COMMAND=%CMD_NAME%! > %DIST%%CMD_NAME%.bat
+echo "Done!"
+goto :eof
+
+:all
 echo "Make transfer batchs!"
 for /f %%F in ('dir "%SRC%\*" /A:-D /B') do (
 	echo !BASE_TEXT:COMMAND=%%F! > %DIST%%%F.bat
@@ -72,4 +99,5 @@ goto :eof
     echo.
     echo    -s, --src       the wsl command path
     echo    -d, --dist      dist dir
+	echo    -c, --command   [optional] output only the specified command
     echo    -h, --help      display the help
