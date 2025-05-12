@@ -97,7 +97,7 @@ goto :eof
 	echo.
     echo usage: bootstrap -s "\\wsl.localhost\Ubuntu\usr\bin\" -d "bin\"
     echo.
-    echo    -s, --src       the wsl command path
-    echo    -d, --dist      dist dir
+    echo    -s, --src       the wsl command path (default: \\wsl.localhost\Ubuntu\usr\bin\)
+    echo    -d, --dist      dist dir (default: bin\)
 	echo    -c, --command   [optional] output only the specified command
     echo    -h, --help      display the help
